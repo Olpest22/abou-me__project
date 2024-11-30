@@ -8,7 +8,7 @@ app.set('view engine', 'hbs')
 app.use('/resources', express.static(__dirname + '/resources'))
 
 app.use((req, res, next) => {
-  res.setHeader("Content-Security-Policy", "default-src 'self'; img-src 'self' https://yastatic.net;");
+  res.setHeader("Content-Security-Policy", "default-src 'self'; img-src 'self' https://yastatic.net data:;");
   next();
 });
 
