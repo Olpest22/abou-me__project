@@ -17,7 +17,8 @@ app.use((req, res, next) => {
     "style-src 'self' https://fonts.googleapis.com; " + // Разрешаем стили с Google Fonts
     "font-src 'self' https://fonts.gstatic.com; " + // Разрешаем шрифты с Google Fonts
     "script-src 'self' https://cdnjs.cloudflare.com; " + // Разрешаем скрипты с CDNJS (GSAP и другие)
-    "img-src 'none';"  // Запрещаем все изображения (если это необходимо)
+    "img-src 'self' https://yastatic.net; " + // Разрешаем изображения с yastatic.net
+    "img-src data:; " // Разрешаем загрузку изображений в формате data URI
   );
   next();
 });
