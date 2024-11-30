@@ -7,6 +7,11 @@ const port = 4000;
 app.set('view engine', 'hbs')
 app.use('/resources', express.static(__dirname + '/resources'))
 
+app.use((req, res, next) => {
+  res.setHeader("Content-Security-Policy", "default-src 'self'; img-src 'self' https://yastatic.net;");
+  next();
+});
+
 app.engine("hbs", expressHbs.engine({
   layoutsDir: "views/layout",
   defaultLayout: "layout",
