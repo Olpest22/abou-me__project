@@ -4,46 +4,42 @@ const app = express();
 const expressHbs = require("express-handlebars");
 const port = 4000;
 
-// Устанавливаем view engine для hbs
 app.set('view engine', 'hbs');
-
-// Раздаём статические файлы из папки 'resources'
 app.use('/resources', express.static(__dirname + '/resources'));
 
-// Устанавливаем Content-Security-Policy (CSP)
+// Content Security Policy (CSP)
 app.use((req, res, next) => {
   res.setHeader("Content-Security-Policy", 
-    "default-src 'self'; " + // Разрешаем загрузку только с того же домена по умолчанию
-    "style-src 'self' https://fonts.googleapis.com; " + // Разрешаем стили с Google Fonts
-    "font-src 'self' https://fonts.gstatic.com; " + // Разрешаем шрифты с Google Fonts
-    "script-src 'self' https://cdnjs.cloudflare.com; " + // Разрешаем скрипты с CDNJS (GSAP и другие)
-    "img-src 'self' https://yastatic.net; " + // Разрешаем изображения с yastatic.net
-    "img-src data:; " // Разрешаем загрузку изображений в формате data URI
+    "default-src 'self'; " +  // Все источники по умолчанию только с того же домена
+    "style-src 'self' https://fonts.googleapis.com; " +  // Разрешаем стили с Google Fonts
+    "font-src 'self' https://fonts.gstatic.com; " +  // Разрешаем шрифты с Google Fonts
+    "script-src 'self' https://cdnjs.cloudflare.com; " +  // Разрешаем скрипты с CDNJS
+    "img-src 'self' https://yastatic.net data:; " + // Разрешаем изображения с yastatic.net и data URI
+    "connect-src 'self';"  // Разрешаем соединения только с того же домена
   );
   next();
 });
 
-// Устанавливаем движок для hbs
+// Настройка шаблонов с помощью express-handlebars
 app.engine("hbs", expressHbs.engine({
   layoutsDir: "views/layout",
   defaultLayout: "layout",
   extname: "hbs"
 }));
 
-// Роут для главной страницы
 app.get("/", function (request, response) {
   response.render("body.hbs", {
     title: "НАЗВАНИЕ САЙТА",
   });
 });
 
-// Логирование URL запросов для отладки
+// Логирование URL запроса (можно удалить, если не нужно)
 app.use((req, res, next) => {
   console.log(`Request URL: ${req.url}`);
   next();
 });
 
-// Запуск сервера на порту 4000
+// Запуск сервера
 app.listen(port, '127.0.0.1', function () {
   console.log(`http://localhost:${port}`);
 });
