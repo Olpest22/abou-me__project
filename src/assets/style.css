@@ -144,6 +144,8 @@ body {
     box-shadow: .1rem .1rem .3rem var(--greyLight-3); /* Уменьшаем тень */
     transition: .1s ease;
     color: var(--primary-dark);
+    outline: none;
+   -webkit-tap-highlight-color: transparent;
 }
 
 @media (max-width: 1024px) {
