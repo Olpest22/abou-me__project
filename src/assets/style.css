@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
 /* Общие стили для сброса */
 *,
 *::after,
@@ -14,6 +16,7 @@
     --primary-dark: #5b0eeb;
     
     --white: #FFFFFF;
+    --greyLight-0: #ebf1f8;
     --greyLight-1: #E4EBF5;
     --greyLight-2: #c8d0e7;
     --greyLight-3: #bec8e4;
@@ -83,6 +86,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .wrap-main__conteiner__panel {
@@ -137,8 +142,68 @@ body {
 
 }
 
+.font_nutito--white{
+    font-family: "Comfortaa", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-size: 30px;
+    font-style: normal;
+    color: black;
+    gap: 5px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.font_comfortaa{
+    font-family: "Comfortaa", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-size: 20px;
+    font-style: normal;
+    color: black;
+    text-align: center;
+    margin-bottom: 5%;
+}
+.font_comfortaa.text_shader.big{
+    font-size: 30px;
+}
+.font_comfortaa.text_shader.link{
+    font-size: 30px;
+    text-shadow: 
+    1px 1px 2px #bec8e4,   /* светлая тень */
+    -1px -1px 1px #ffffff,  /* светлая верхняя тень */
+    -1px 1px 1px #bec8e4,   /* более темная тень */
+    1px -1px 1px #bec8e4;   /* более темная тень */
+color: var(--white); 
+}
+.font_comfortaa.text_shader {
+    text-shadow: 
+        1px 1px 2px #bec8e4,   /* светлая тень */
+        -1px -1px 1px #ffffff,  /* светлая верхняя тень */
+        -1px 1px 1px #bec8e4,   /* более темная тень */
+        1px -1px 1px #bec8e4;   /* более темная тень */
+    color: var(--greyLight-1); /* цвет текста */
+}
+
+.font_comfortaa.text_shader.border {
+  /* более темная тень */
+    text-shadow: none; 
+    font-size: 30px;
+    color: var(--white); /* цвет текста */
+    border: 1.5px solid var(--greyLight-1);
+    border-radius: 2rem;
+    padding: 5px 10px;
+    margin-bottom: 0;
+
+}
 
 
+
+.flex{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
 .box:active {
     transform: translateY(2px); /* Сдвиг вниз */
     box-shadow: .1rem .1rem .3rem var(--greyLight-3); /* Уменьшаем тень */
@@ -148,12 +213,20 @@ body {
    -webkit-tap-highlight-color: transparent;
 }
 
+.font_nutito--white span {
+    display: inline-block;
+    transform: translateZ(-100px);
+    opacity: 0;
+    perspective: 400px; /* добавляем перспективу для более заметного эффекта */
+  }
+
+
 @media (max-width: 1024px) {
-    .wrap-main__conteiner {
+     .wrap-main__conteiner {
         flex-direction: column;
         gap: 10px;
     }
-
+ 
     .wrap-main__conteiner__panel {
         width: 100%;
         flex-direction: row;
@@ -181,6 +254,19 @@ body {
 }
 
 @media (max-width: 800px) {
+    .font_comfortaa{
+        font-family: "Comfortaa", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 600;
+        font-size: 15px;
+        font-style: normal;
+        color: black;
+        text-align: center;
+        margin-bottom: 5%;
+    }
+    .font_nutito--white{
+        font-size: 20px;
+    }
     .wrap-main__conteiner {
         display: flex;
           /* На больших экранах панель слева, страница справа */
@@ -215,6 +301,12 @@ body {
     .box{
         border-radius: 3rem;
     }
+
+    .font_comfortaa.text_shader.border {
+        font-size: 15px;
+  
+    }
+      
 }
 
 

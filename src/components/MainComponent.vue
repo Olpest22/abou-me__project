@@ -35,10 +35,10 @@ export default {
   setup() {
     const activePageIndex = ref(0); // Для отслеживания активной страницы
     const pages = ref([
-      { id: 'about-me', label: 'Обо мне' },
-      { id: 'portfolio', label: 'Портфолио' },
-      { id: 'skills', label: 'Мои скиллы' },
-      { id: 'other', label: 'Разное' }
+      { id: 'about-me', label: 'Кто я' },
+      { id: 'portfolio', label: 'Опыт' },
+      { id: 'skills', label: 'Скиллы' },
+      { id: 'other', label: 'Контакты' }
     ]);
 
     const setActivePage = (index) => {
@@ -89,22 +89,31 @@ export default {
 
       // Наклон кнопок при наведении
       const ANGLE = 0.7;
-      pageElements.forEach((page) => {
-        page.addEventListener('mouseout', () => {
-          page.style.transform = `perspective(400px) rotateX(0deg) rotateY(0deg) translateZ(0px)`;
-          page.style.transition = `all 10s ease`;
-        });
+const TRANSITION_DURATION = 0.3; // Продолжительность перехода в секундах
 
-        page.addEventListener('mousemove', (e) => {
-          const w = page.clientWidth;
-          const h = page.clientHeight;
-          const y = (e.offsetX - w * 0.5) / w * ANGLE;
-          const x = -(e.offsetY - h * 0.5) / h * ANGLE;
+pageElements.forEach((page) => {
+  page.style.transition = `transform ${TRANSITION_DURATION}s ease`;
 
-          page.style.transform = `perspective(400px) rotateX(${x}deg) rotateY(${y}deg)`;
-          page.style.transition = `none`;
-        });
-      });
+  page.addEventListener('mouseout', () => {
+    // Устанавливаем плавный переход при возвращении
+    page.style.transition = `transform ${TRANSITION_DURATION}s ease`;
+    page.style.transform = 'perspective(400px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+  });
+
+  page.addEventListener('mousemove', (e) => {
+    const w = page.clientWidth;
+    const h = page.clientHeight;
+    const y = ((e.offsetX - w * 0.5) / w) * ANGLE;
+    const x = -((e.offsetY - h * 0.5) / h) * ANGLE;
+
+    // Отключаем переход во время движения, чтобы он не мешал
+    page.style.transition = 'none';
+    page.style.transform = `perspective(400px) rotateX(${x}deg) rotateY(${y}deg)`;
+  });
+});
+
+
+
     });
 
     return {
